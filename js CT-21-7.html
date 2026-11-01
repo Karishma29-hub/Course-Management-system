@@ -1,0 +1,149 @@
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+</head>
+<body>
+<button onclick="displayStudents()">Display</button>
+<div id="div1"></div>
+<script>
+let students = [
+    {id: 100, name: "Karishma", marks: 90},
+    {id: 101, name: "Prathiba", marks: 92},
+    {id: 102, name: "Pooja", marks: 94},
+    {id: 104, name: "Sangavi", marks: 90}
+];
+
+function displayStudents() {
+    let result = "<h3>Student List</h3>";
+
+    for (let s of students) {
+        result += "ID: " + s.id + "<br>";
+        result += "Name: " + s.name + "<br>";
+        result += "Marks: " + s.marks + "<br><br>";
+    }
+
+    document.getElementById("div1").style.backgroundColor = "aqua";
+    document.getElementById("div1").innerHTML = result;
+}
+
+//push students
+function pushStudents()
+{
+students.push({id:105,name:”datchayeni”,marks:85});
+}
+
+</script>
+
+</body>
+</html>
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+</head>
+<body>
+
+<input type="text" id="sid" placeholder="Enter ID">
+<input type="text" id="name" placeholder="Enter Name">
+<input type="text" id="marks" placeholder="Enter Marks">
+
+<button onclick="displayStudents()">Display</button>
+<button onclick="pushStudents()">Push</button>
+<button onclick="removeLast()">Remove Last</button>
+<button onclick="removeFirst()">Remove First</button>
+<button onclick="addFirst()">Add First</button>
+<button onclick="modifyStudents()">Modify</button>
+
+<div id="div1"></div>
+
+<script>
+
+let students = [
+    {id:100, name:"Karishma", marks:90},
+    {id:101, name:"Prathiba", marks:92},
+    {id:102, name:"Pooja", marks:94},
+    {id:104, name:"Sangavi", marks:90}
+];
+
+// Display Students
+function displayStudents() {
+    let result = "<h3>Student List</h3>";
+
+    for (let s of students) {
+        result += "ID: " + s.id + "<br>";
+        result += "Name: " + s.name + "<br>";
+        result += "Marks: " + s.marks + "<br><br>";
+    }
+
+    document.getElementById("div1").style.backgroundColor = "aqua";
+    document.getElementById("div1").innerHTML = result;
+}
+
+// Push Student
+function pushStudents() {
+    let id = document.getElementById("sid").value;
+    let name = document.getElementById("name").value;
+    let marks = document.getElementById("marks").value;
+
+    students.push({
+        id: Number(id),
+        name: name,
+        marks: Number(marks)
+    });
+
+    displayStudents();
+}
+
+// Remove Last
+function removeLast() {
+    let removed = students.pop();
+    document.getElementById("div1").innerHTML =
+        "<h3>Removed Student:</h3>" + removed.name;
+}
+
+// Remove First
+function removeFirst() {
+    let removed = students.shift();
+    document.getElementById("div1").innerHTML =
+        "<h3>Removed Student:</h3>" + removed.name;
+}
+
+// Add First
+function addFirst() {
+    let id = document.getElementById("sid").value;
+    let name = document.getElementById("name").value;
+    let marks = document.getElementById("marks").value;
+
+    students.unshift({
+        id: Number(id),
+        name: name,
+        marks: Number(marks)
+    });
+
+    displayStudents();
+}
+
+// Modify Student (replace 3rd student)
+function modifyStudents() {
+    let id = document.getElementById("sid").value;
+    let name = document.getElementById("name").value;
+    let marks = document.getElementById("marks").value;
+
+    students.splice(2, 1, {
+        id: Number(id),
+        name: name,
+        marks: Number(marks)
+    });
+
+    displayStudents();
+}
+
+</script>
+
+</body>
+</html>

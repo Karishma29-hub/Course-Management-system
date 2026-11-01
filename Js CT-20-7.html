@@ -1,0 +1,251 @@
+<! --
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript</title>
+</head>
+<body>
+
+<button onclick="alert('Hiiiiii!!!!!!')">Click Me to say hi</button>
+
+<script>
+    document.write("This is a JavaScript example");
+    console.log("Console output");
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head><title> Javascript </title>
+</head>
+<body>
+<h2 id=”h1”> Javascript functions </h2>
+<button ondblclick=displayMessage()> Click Me to to change  </button>
+<script>
+
+function displayMessage()
+{
+document.getElementById(“h1”).innerHTML = “The message sent from function”;
+}
+</script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head><title> Javascript </title>
+</head> 
+<body>
+<h2 id=”h1”> Javascript functions </h2>
+<button onmousedown=displayMessage()> Click Me to to change  </button>
+<script>
+
+function displayMessage()
+{
+document.getElementById(“h1”).innerHTML = “The message sent from function”;
+}
+</script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head><title> Javascript </title>
+</head>
+<body>
+<h2 id=”h1”> Javascript functions </h2>
+<button onmouseup=displayMessage()> Click Me to to change  </button>
+<script>
+
+function displayMessage()
+{
+document.getElementById(“h1”).innerHTML = “The message sent from function”;
+}
+</script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head><title> Javascript </title>
+</head>
+<body>
+<h2 id=”h1”> Javascript functions </h2>
+<button onmouseover=displayMessage()> Click Me to to change  </button>
+<script>
+
+function displayMessage()
+{
+document.body.style.backgroundColor = “aqua”;
+}
+</script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript</title>
+</head>
+<body>
+
+<h2 id="h1">JavaScript Functions</h2>
+
+<button onmouseover="displayMessage()" onmouseout="backtoForm()">
+    Click Me to change
+</button>
+
+<script>
+function displayMessage() {
+    document.body.style.backgroundColor = "aqua";
+}
+
+function backtoForm() {
+    document.body.style.backgroundColor = "white";
+}
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript</title>
+</head>
+<body>
+
+<h2 id="h1">JavaScript Functions</h2>
+
+<button onmousemove="count()">Click Me to change</button>
+
+<script>
+let counter = 0;
+
+function count() {
+    counter++;
+    document.getElementById("h1").innerHTML = counter;
+}
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript</title>
+</head>
+<body>
+
+<h2 id="h1">JavaScript Functions</h2>
+
+<button onmouseover="displayMessage()" onmouseout="backtoForm()">
+    Click Me to change
+</button>
+
+<script>
+function displayMessage() {
+    document.body.style.backgroundColor = "aqua";
+}
+
+function backtoForm() {
+    document.body.style.backgroundColor = "white";
+}
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head><title> Javascript </title>
+</head>
+<body>
+<input type = “password” placeholder = “Enter password” onfocus=focus()>
+<p id=”p1”></p>
+<script>
+function focus()
+{
+document.getElementById(“p1”).innerHTML = “Password must contain 8 characters”;
+}
+</script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head><title> Javascript </title>
+</head>
+<body>
+<input type = “password” placeholder = “Enter password” onfocus=displayMessage() onblur = hideMessage()>
+<p id=”p1”></p>
+<script>
+function displayMessage()
+{
+document.getElementById(“p1”).innerHTML = “Password must contain 8 characters”;
+}
+function hideMessage()
+{
+document.getElementById(“p1”).innerHTML = “”;
+
+}
+</script>
+</body>
+</html>
+
+
+EventListener
+
+<!DOCTYPE html>
+<html>
+<head><title> EventListener </title>
+</head>
+<body>
+<button id=”b1”>CLick Me!! </button>
+<script>
+let b = document.getElementById(“b1”);
+b.addEventListener(“click”,show);
+function show()
+{
+alert(“Event is listened”);
+}
+b.addEventListener("mouseover",colorChange);
+function colorChange()
+{
+document.body.style.backgroundColor = "yellow";
+}
+b.addEventListener("mouseout",colorChange1);
+function colorChange1()
+{
+document.body.style.backgroundColor = "white";
+}
+
+</script>
+</body>
+</html>
+--> 
+
+<html>
+<head> <title> Student management system </title> </head>
+<body>
+<script>
+let students = [{id:100,name:Abinaya,marks:90},{id:101,name:Haseeba,marks:92},{id:102,name:Anika,marks:94},{id:104,name:Asiya,marks:90}]
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Notice PWA</title>
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef6ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 60px auto;
+        }
+
+        .header {
+            background: #2196f3;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-top: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .notice {
+            border-left: 5px solid #2196f3;
+            padding-left: 15px;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #1976d2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>🎓 College Notice App</h1>
+            <p>Student Information Portal</p>
+        </div>
+
+        <div class="card">
+            <h2>📢 Today's Notice</h2>
+
+            <div class="notice">
+                <h3>CAT-II Examination</h3>
+                <p>CAT-II starts on <strong>12 October 2026</strong>.</p>
+            </div>
+
+            <button onclick="location.reload()">
+                🔄 Refresh Notice
+            </button>
+        </div>
+
+        <div class="card">
+            <h2>📅 Important Information</h2>
+            <p><strong>Examination:</strong> CAT-II</p>
+            <p><strong>Date:</strong> 12 October 2026</p>
+        </div>
+
+        <div class="status" id="status">
+            🟢 Online
+        </div>
+
+    </div>
+<script>
+    function updateStatus() {
+        const status = document.getElementById("status");
+
+        if (navigator.onLine) {
+            status.innerHTML = "🟢 Online";
+        } else {
+            status.innerHTML = "🔴 Offline";
+        }
+    }
+
+    window.addEventListener("online", updateStatus);
+    window.addEventListener("offline", updateStatus);
+
+    updateStatus();
+</script>
+
+
+
+
+
+
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>

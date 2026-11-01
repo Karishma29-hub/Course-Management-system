@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Login</title>
+
+    <style>
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            color: #243b64;
+
+            background:
+                radial-gradient(circle at 5% 15%, #d9ebff 0, #d9ebff 90px, transparent 91px),
+                radial-gradient(circle at 95% 85%, #dcecff 0, #dcecff 130px, transparent 131px),
+                linear-gradient(135deg, #f4faff, #e5f2ff);
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            background: rgba(255, 255, 255, 0.96);
+
+            padding: 18px 8%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 2px 12px rgba(60, 100, 150, 0.08);
+        }
+
+        nav h2 {
+            color: #243b64;
+            font-size: 23px;
+        }
+
+        nav ul {
+            list-style: none;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 32px;
+        }
+
+        nav ul li a {
+            color: #344b70;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #527de8;
+        }
+
+        .active {
+            color: #527de8 !important;
+
+            background: #edf3ff;
+
+            padding: 10px 18px;
+
+            border-radius: 20px;
+        }
+
+
+        /* =========================
+           LOGIN AREA
+        ========================= */
+
+        .login-page {
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 50px 20px;
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================= */
+
+        .login-card {
+            width: 100%;
+
+            max-width: 520px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            padding: 45px 50px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 15px 40px rgba(70, 110, 160, 0.13);
+
+            text-align: center;
+        }
+
+
+        /* User Icon */
+
+        .login-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #edf3ff;
+
+            color: #527de8;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 32px;
+        }
+
+
+        /* Heading */
+
+        .login-card h1 {
+            color: #263f6d;
+
+            font-size: 34px;
+
+            margin-bottom: 12px;
+        }
+
+        .login-description {
+            color: #71809a;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            text-align: left;
+
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #344b70;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+        .input-box {
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border: 1px solid #d3e0f5;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            color: #344b70;
+
+            background: #fbfdff;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        .input-box:focus {
+            border-color: #8caaf0;
+
+            box-shadow:
+                0 0 0 3px rgba(140, 170, 240, 0.15);
+
+            background: white;
+        }
+
+        .input-box::placeholder {
+            color: #9aaac1;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #dce8ff;
+
+            color: #4169c9;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #cbdcff;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           REGISTER LINK
+        ========================= */
+
+        .register-text {
+            margin-top: 22px;
+
+            color: #71809a;
+
+            font-size: 15px;
+        }
+
+        .register-text a {
+            color: #527de8;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+
+                gap: 15px;
+
+                padding: 20px;
+            }
+
+            nav ul {
+                gap: 15px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .login-page {
+                padding: 30px 15px;
+            }
+
+            .login-card {
+                padding: 35px 25px;
+            }
+
+            .login-card h1 {
+                font-size: 28px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <h2>🎓 Student Management System</h2>
+
+        <ul>
+
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li>
+                <a href="student-login.html" class="active">
+                    Login
+                </a>
+            </li>
+
+            <li>
+                <a href="student-register.html">
+                    Register
+                </a>
+            </li>
+
+            <li>
+                <a href="student-dashboard.html">
+                    Dashboard
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- LOGIN PAGE -->
+
+    <main class="login-page">
+
+        <div class="login-card">
+
+
+            <!-- ICON -->
+
+            <div class="login-icon">
+                👤
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Student Login
+            </h1>
+
+            <p class="login-description">
+                Enter your email and password to access
+                your student account.
+            </p>
+
+
+            <!-- LOGIN FORM -->
+
+            <form onsubmit="login(); return false;">
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        class="input-box"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="input-box"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login &nbsp; →
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER -->
+
+            <p class="register-text">
+
+                Don't have an account?
+
+                <a href="student-register.html">
+                    Register Here
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script
+        type="module"
+        src="js/script.js">
+    </script>
+
+</body>
+
+</html>

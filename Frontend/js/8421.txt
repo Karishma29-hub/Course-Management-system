@@ -1,0 +1,36 @@
+8421
+
+0011
+0001
+0010
+
+0110
+0011
+-------
+0101
+
+
+1100
+
+
+
+Task: 18-5-2026
+
+take list a 
+take list b 
+change them into array
+
+
+change it to a matrix 
+then row wise irukardhu mean ah um pananum (find)
+then column wise irukardha average ah um pananum (find)
+
+
+declare an array a  with duplicates and  find its count and print the duplicate values
+
+what are pandas, functions , why used in python
+
+
+
+
+

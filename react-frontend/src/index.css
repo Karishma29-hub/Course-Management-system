@@ -1,0 +1,1577 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #eef5ff, #f7f3ff);
+    color: #294570;
+    min-height: 100vh;
+}
+
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+nav {
+    width: 100%;
+    min-height: 75px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 55px;
+
+    box-shadow: 0 3px 15px rgba(40, 70, 110, 0.08);
+}
+
+nav h2 {
+    color: #294570;
+    font-size: 23px;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: #61728e;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    padding: 10px 15px;
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background: #edf3ff;
+    color: #527de8;
+}
+
+
+/* ========================================
+   HOME PAGE
+======================================== */
+
+.home-page {
+    width: 100%;
+    padding: 55px 30px 70px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ========================================
+   HERO SECTION
+======================================== */
+
+.hero-section {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 390px;
+
+    padding: 55px 65px;
+
+    background: white;
+    border-radius: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 50px;
+
+    box-shadow: 0 12px 35px rgba(50, 80, 130, 0.10);
+}
+
+.hero-content {
+    flex: 1;
+    text-align: left;
+}
+
+.welcome-badge {
+    display: inline-block;
+
+    background: #edf3ff;
+    color: #527de8;
+
+    padding: 9px 17px;
+    border-radius: 25px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    color: #294570;
+
+    font-size: 46px;
+    line-height: 1.15;
+
+    margin-bottom: 18px;
+}
+
+.hero-content h1 span {
+    color: #7d8fe0;
+}
+
+.hero-content p {
+    max-width: 600px;
+
+    color: #71809a;
+
+    font-size: 17px;
+    line-height: 1.7;
+
+    margin-bottom: 28px;
+}
+
+
+/* ========================================
+   HERO BUTTONS
+======================================== */
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 13px 24px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.primary-button {
+    border: none;
+
+    background: linear-gradient(
+        135deg,
+        #87aaf2,
+        #9789e5
+    );
+
+    color: white;
+}
+
+.secondary-button {
+    border: 1px solid #d8e1ef;
+
+    background: white;
+
+    color: #52709d;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 18px rgba(70, 90, 150, 0.15);
+}
+
+
+/* ========================================
+   HERO ICON
+======================================== */
+
+.hero-icon {
+    width: 180px;
+    height: 180px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #e3efff,
+        #eee7ff
+    );
+
+    border-radius: 35px;
+
+    font-size: 78px;
+
+    box-shadow: 0 8px 20px rgba(80, 100, 160, 0.08);
+}
+
+
+/* ========================================
+   FEATURES
+======================================== */
+
+.features-section {
+    width: 100%;
+    max-width: 1100px;
+
+    margin-top: 65px;
+
+    text-align: center;
+}
+
+.features-section h2 {
+    color: #294570;
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+.features-subtitle {
+    color: #8190a7;
+
+    font-size: 15px;
+
+    margin-bottom: 30px;
+}
+
+.features-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+.feature-card {
+    background: white;
+
+    border: 1px solid #e1e8f3;
+
+    border-radius: 18px;
+
+    padding: 28px 22px;
+
+    text-align: center;
+
+    box-shadow: 0 6px 20px rgba(50, 80, 130, 0.07);
+
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 12px 25px rgba(50, 80, 130, 0.12);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        135deg,
+        #e3efff,
+        #eee8ff
+    );
+
+    font-size: 28px;
+}
+
+.feature-card h3 {
+    color: #344b70;
+
+    font-size: 18px;
+
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #8190a7;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+    width: 100%;
+
+    text-align: center;
+
+    padding: 25px;
+
+    color: #71809a;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   GENERAL CONTAINER
+======================================== */
+
+.container {
+    width: 100%;
+    max-width: 850px;
+
+    margin: 60px auto;
+
+    padding: 45px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(50, 80, 130, 0.10);
+}
+
+.container h1 {
+    color: #294570;
+
+    font-size: 38px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ========================================
+   FORMS
+======================================== */
+
+form {
+    width: 100%;
+    max-width: 420px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+form input {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid #d7e0ee;
+
+    border-radius: 10px;
+
+    background: #f9fbff;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+form input:focus {
+    border-color: #8eaff2;
+
+    box-shadow: 0 0 0 3px rgba(142, 175, 242, 0.15);
+}
+
+form button {
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #87aaf2,
+        #9789e5
+    );
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+form button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 16px rgba(70, 90, 150, 0.15);
+}
+
+
+/* ========================================
+   STUDENT LOGIN / ADMIN LOGIN
+======================================== */
+
+.login-page {
+    max-width: 500px;
+
+    margin: 65px auto;
+
+    padding: 45px 50px;
+}
+
+.login-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #e3efff,
+        #eee8ff
+    );
+
+    font-size: 35px;
+}
+
+.login-page h1 {
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    color: #8190a7;
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+}
+
+.login-page form {
+    max-width: 380px;
+}
+
+.register-text {
+    margin-top: 22px;
+
+    color: #8190a7;
+
+    font-size: 14px;
+}
+
+.register-text span {
+    color: #527de8;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-left: 5px;
+}
+
+.register-text span:hover {
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   COURSE CARDS
+======================================== */
+
+.course-card {
+    max-width: 700px;
+
+    margin: 20px auto;
+
+    padding: 25px;
+
+    background: white;
+
+    border: 1px solid #e1e8f3;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 18px rgba(50, 80, 130, 0.07);
+
+    text-align: center;
+}
+
+.course-card h3 {
+    color: #294570;
+
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    color: #71809a;
+
+    margin-bottom: 18px;
+}
+
+.course-card button {
+    padding: 11px 22px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #7f9fe8;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.course-card button:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   COURSE DETAILS
+======================================== */
+
+.course-header {
+    margin-bottom: 25px;
+}
+
+.course-badge {
+    display: inline-block;
+
+    padding: 8px 16px;
+
+    border-radius: 20px;
+
+    background: #edf3ff;
+
+    color: #527de8;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 15px;
+}
+
+.enroll-button {
+    padding: 14px 32px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #dce8ff,
+        #e7e1ff
+    );
+
+    color: #4d5fc4;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.enroll-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(70, 90, 150, 0.12);
+}
+
+.course-list {
+    margin-top: 30px;
+}
+
+.course-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    background: white;
+
+    border: 1px solid #e1e8f3;
+
+    border-radius: 15px;
+
+    padding: 18px;
+
+    margin: 15px 0;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    text-align: left;
+}
+
+.course-item:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(50, 80, 130, 0.10);
+}
+
+.course-thumbnail {
+    width: 75px;
+    height: 60px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #e2edff,
+        #eee8ff
+    );
+
+    font-size: 28px;
+
+    flex-shrink: 0;
+}
+
+.course-info {
+    flex: 1;
+}
+
+.course-info h3 {
+    margin-bottom: 5px;
+
+    color: #344b70;
+}
+
+.course-info span {
+    color: #8a99af;
+
+    font-size: 13px;
+}
+
+.arrow {
+    color: #527de8;
+
+    font-size: 22px;
+}
+
+.learning-card {
+    margin-top: 35px;
+
+    padding: 30px;
+
+    background: linear-gradient(
+        135deg,
+        #f9fbff,
+        #f7f3ff
+    );
+
+    border: 1px solid #dfe7f7;
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.selected-thumbnail {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: linear-gradient(
+        135deg,
+        #e2edff,
+        #eee8ff
+    );
+
+    font-size: 35px;
+}
+
+.video-container {
+    width: 100%;
+
+    max-width: 760px;
+
+    margin: 25px auto;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(60, 90, 140, 0.15);
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+
+.progress-section {
+    max-width: 760px;
+
+    margin: 25px auto 0;
+
+    text-align: left;
+}
+
+.progress-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    color: #344b70;
+}
+
+.progress-heading strong {
+    color: #527de8;
+}
+
+.progress-bar {
+    width: 100%;
+
+    height: 16px;
+
+    background: #e4eaf4;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #8eaff2,
+        #9a8de5
+    );
+
+    border-radius: 20px;
+}
+
+.progress-message {
+    margin-top: 12px;
+
+    text-align: center;
+
+    color: #71809a;
+}
+
+
+/* ========================================
+   ADMIN DASHBOARD
+======================================== */
+
+.admin-dashboard {
+    max-width: 1000px;
+}
+
+.admin-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #e3efff,
+        #eee8ff
+    );
+
+    font-size: 35px;
+}
+
+.dashboard-subtitle {
+    color: #8190a7;
+
+    margin-bottom: 35px;
+}
+
+.admin-cards {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.admin-card {
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e8f3;
+
+    border-radius: 16px;
+
+    box-shadow: 0 5px 18px rgba(50, 80, 130, 0.07);
+
+    transition: 0.3s;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 25px rgba(50, 80, 130, 0.12);
+}
+
+.admin-card-icon {
+    font-size: 32px;
+
+    margin-bottom: 12px;
+}
+
+.admin-card h3 {
+    color: #344b70;
+
+    margin-bottom: 10px;
+}
+
+.admin-card p {
+    color: #8190a7;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+.admin-card button {
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #87aaf2,
+        #9789e5
+    );
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.admin-card button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(70, 90, 150, 0.15);
+}
+
+
+/* ========================================
+   LOGIN OPTIONS
+======================================== */
+
+.login-options {
+    width: 260px;
+
+    margin-top: 18px;
+    padding: 20px;
+
+    background: white;
+
+    border: 1px solid #e1e8f3;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(50, 80, 130, 0.12);
+
+    text-align: center;
+}
+
+.login-options h3 {
+    color: #344b70;
+
+    margin-bottom: 15px;
+}
+
+.login-options button {
+    width: 100%;
+
+    padding: 11px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #87aaf2,
+        #9789e5
+    );
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.login-options button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(70, 90, 150, 0.15);
+}
+
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+.container,
+.hero-section,
+.feature-card,
+.course-card,
+.admin-card {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ========================================
+   MOBILE RESPONSIVE
+======================================== */
+
+@media (max-width: 750px) {
+
+    nav {
+        height: auto;
+
+        padding: 18px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .home-page {
+        padding: 30px 18px;
+    }
+
+    .hero-section {
+        padding: 40px 25px;
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+    .hero-icon {
+        width: 130px;
+        height: 130px;
+
+        font-size: 55px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 92%;
+
+        padding: 30px 20px;
+    }
+
+    .course-item {
+        gap: 12px;
+    }
+
+    .course-thumbnail {
+        width: 60px;
+        height: 55px;
+    }
+}
+
+
+
+
+/* =========================================
+   STUDENT CERTIFICATE
+   ========================================= */
+
+.certificate-page {
+    width: 100%;
+    min-height: 80vh;
+    padding: 35px 20px;
+    box-sizing: border-box;
+
+    background: #f4f6fa;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* MAIN CERTIFICATE */
+
+.certificate-page .certificate {
+    width: 750px;
+    max-width: 92%;
+    min-height: 480px;
+
+    box-sizing: border-box;
+
+    background: white;
+
+    border: 3px solid #243b6b;
+
+    padding: 8px;
+
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* INNER BORDER */
+
+.certificate-page .certificate-inner {
+    min-height: 450px;
+
+    box-sizing: border-box;
+
+    border: 1.5px solid #8da4c7;
+
+    padding: 30px 45px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* CORNER DECORATIONS */
+
+.certificate-page .certificate-inner::before {
+    content: "";
+
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    width: 35px;
+    height: 35px;
+
+    border-top: 2px solid #243b6b;
+    border-left: 2px solid #243b6b;
+}
+
+
+.certificate-page .certificate-inner::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 12px;
+    right: 12px;
+
+    width: 35px;
+    height: 35px;
+
+    border-bottom: 2px solid #243b6b;
+    border-right: 2px solid #243b6b;
+}
+
+
+/* TROPHY */
+
+.certificate-page .certificate-badge {
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 8px;
+
+    border-radius: 50%;
+
+    background: #eef3fa;
+
+    border: 2px solid #8da4c7;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+
+/* SMALL TITLE */
+
+.certificate-page .certificate-small-title {
+    margin: 0 0 8px;
+
+    font-size: 11px;
+
+    letter-spacing: 1.8px;
+
+    font-weight: 600;
+
+    color: #6b7890;
+}
+
+
+/* MAIN TITLE */
+
+.certificate-page .certificate-inner h1 {
+    margin: 0;
+
+    font-size: 30px;
+
+    line-height: 1.2;
+
+    color: #243b6b;
+
+    font-weight: 600;
+}
+
+
+/* TITLE LINE */
+
+.certificate-page .certificate-line {
+    width: 220px;
+
+    height: 2px;
+
+    background: #8da4c7;
+
+    margin: 12px 0 20px;
+}
+
+
+/* PRESENTED TEXT */
+
+.certificate-page .presented-text {
+    margin: 0 0 8px;
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* STUDENT NAME */
+
+.certificate-page .student-name {
+    margin: 0 0 13px;
+
+    padding-bottom: 6px;
+
+    min-width: 240px;
+
+    border-bottom: 2px solid #243b6b;
+
+    color: #172b4d;
+
+    font-size: 30px;
+
+    line-height: 1.2;
+
+    font-weight: 600;
+}
+
+
+/* NORMAL TEXT */
+
+.certificate-page .certificate-text {
+    margin: 4px 0;
+
+    color: #555;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+/* COURSE NAME */
+
+.certificate-page .course-name {
+    margin: 9px 0;
+
+    color: #243b6b;
+
+    font-size: 24px;
+
+    line-height: 1.3;
+
+    font-weight: 600;
+}
+
+
+/* CONGRATULATIONS */
+
+.certificate-page .certificate-message {
+    margin-top: 13px;
+
+    padding: 7px 18px;
+
+    border-radius: 18px;
+
+    background: #eef3fa;
+
+    color: #243b6b;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   BOTTOM SECTION
+   ========================================= */
+
+.certificate-page .certificate-bottom {
+    width: 100%;
+
+    margin-top: auto;
+
+    padding-top: 25px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 80px 1fr;
+
+    align-items: end;
+
+    gap: 15px;
+}
+
+
+/* DATE */
+
+.certificate-page .certificate-date {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.certificate-page .certificate-date strong {
+    display: block;
+
+    color: #243b6b;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+
+.certificate-page .certificate-date span {
+    display: block;
+
+    padding-top: 5px;
+
+    width: 150px;
+
+    border-top: 1px solid #555;
+
+    color: #666;
+
+    font-size: 11px;
+}
+
+
+/* CENTER SEAL */
+
+.certificate-page .certificate-seal {
+    width: 48px;
+    height: 48px;
+
+    margin: auto;
+
+    border: 2px solid #8da4c7;
+
+    border-radius: 50%;
+
+    background: #f7f9fc;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #243b6b;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* SIGNATURE */
+
+.certificate-page .certificate-signature {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.certificate-page .signature-line {
+    width: 150px;
+
+    border-top: 1px solid #555;
+
+    margin-bottom: 5px;
+}
+
+
+.certificate-page .certificate-signature span {
+    color: #666;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   PRINT BUTTON
+   ========================================= */
+
+.certificate-page .print-button {
+    margin-top: 20px;
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #243b6b;
+
+    color: white;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+
+.certificate-page .print-button:hover {
+    background: #1d3159;
+}
+
+
+/* =========================================
+   PRINT
+   ========================================= */
+
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    .certificate-page,
+    .certificate-page .certificate,
+    .certificate-page .certificate * {
+        visibility: visible;
+    }
+
+    .certificate-page {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 0;
+
+        background: white;
+    }
+
+    .certificate-page .certificate {
+        width: 100%;
+
+        max-width: none;
+
+        min-height: 650px;
+
+        border: 3px solid #243b6b;
+
+        box-shadow: none;
+    }
+
+    .certificate-page .print-button {
+        display: none;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .certificate-page {
+        padding: 20px 10px;
+    }
+
+    .certificate-page .certificate {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .certificate-page .certificate-inner {
+        padding: 25px 15px;
+    }
+
+    .certificate-page .certificate-inner h1 {
+        font-size: 25px;
+    }
+
+    .certificate-page .student-name {
+        font-size: 27px;
+    }
+
+    .certificate-page .course-name {
+        font-size: 21px;
+    }
+
+    .certificate-page .certificate-bottom {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .certificate-page .certificate-seal {
+        order: -1;
+    }
+}

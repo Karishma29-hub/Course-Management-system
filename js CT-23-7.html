@@ -1,0 +1,99 @@
+<!--
+<!DOCTYPE html>
+<html>
+<body>
+ 
+<h2>JSON stringify()</h2>
+ 
+<p id="output"></p>
+ 
+<script>
+ 
+let student = {
+    name:"Ram",
+	age:20,
+    course:"AI"
+};
+ 
+ 
+let jsonData = JSON.stringify(student);
+ 
+ 
+document.getElementById("output").innerHTML=jsonData;
+ 
+</script>
+ 
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<body>
+ 
+<h2>JSON Example</h2>
+ 
+<button onclick="showData()">Display Student</button>
+ 
+<p id="result"></p>
+ 
+ 
+<script>
+ 
+function showData(){
+ 
+let json =
+'{"name":"Karishma","department":"AI","year":3}';
+ 
+ 
+let student = JSON.parse(json);
+ 
+ 
+document.getElementById("result").innerHTML =
+"Name: "+student.name+
+"<br>Department: "+student.department+
+"<br>Year: "+student.year;
+ 
+}
+ 
+</script>
+ 
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<head><title>JSON Data Transfer</title></head>
+<body>
+<h2> JSON Data Transfer Example </h2>
+<button onclick = sendData()”>Send JSON Data</button>
+
+<p id=”p1”></p>
+<script>
+ function sendData()
+{
+
+Let student = {
+Id : 100,
+Name: “Geetha”;
+Department: “CS AI”
+};
+Let jsonString = JSON.stringify(student); // converts to string
+
+document.getEmlementById(“p1”).innerHTML = “<b> JSON Data </b> <br><br> +jsonString+”<br><br>;
+
+Let serverResponse = ‘{“status”:”Success”,”message”:”data received”}’;
+
+//convert to object
+
+Let responseObject = JSON.parse(serverResponse);
+
+document.getElementById(“p1”).innerHTML +=
+
+
+}
+</script>
+</body>
+</html>
+
+

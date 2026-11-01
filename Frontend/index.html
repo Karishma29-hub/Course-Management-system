@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #243b64;
+
+            background:
+                radial-gradient(circle at 5% 10%, #d9ebff 0, #d9ebff 90px, transparent 91px),
+                radial-gradient(circle at 95% 85%, #dcecff 0, #dcecff 130px, transparent 131px),
+                linear-gradient(135deg, #f4faff, #e5f2ff);
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            background: rgba(255, 255, 255, 0.96);
+
+            padding: 18px 8%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 2px 12px rgba(60, 100, 150, 0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav h2 {
+            color: #243b64;
+            font-size: 23px;
+        }
+
+        nav ul {
+            list-style: none;
+
+            display: flex;
+            align-items: center;
+
+            gap: 32px;
+        }
+
+        nav ul li a {
+            color: #344b70;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #527de8;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            padding: 40px 8% 25px;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            min-height: 350px;
+
+            margin: auto;
+
+            padding: 55px 60px;
+
+            background: rgba(255, 255, 255, 0.94);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 15px 40px rgba(80, 120, 170, 0.13);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .tag {
+            display: inline-block;
+
+            background: #edf5ff;
+
+            color: #527de8;
+
+            padding: 9px 18px;
+
+            border-radius: 30px;
+
+            font-size: 14px;
+
+            margin-bottom: 18px;
+        }
+
+        .hero-text h1 {
+            font-size: 43px;
+
+            line-height: 1.15;
+
+            color: #263f6d;
+
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            color: #5d82e9;
+        }
+
+        .hero-text p {
+            color: #5c6f8d;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            max-width: 600px;
+
+            margin-bottom: 28px;
+        }
+
+
+        /* =========================
+           HERO BUTTONS
+        ========================= */
+
+        .hero-buttons {
+            display: flex;
+
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: #dce8ff;
+
+            color: #4169c9;
+
+            border: 1px solid #c9dcff;
+        }
+
+        .secondary-btn {
+            background: #f1efff;
+
+            color: #6959c9;
+
+            border: 1px solid #ddd7ff;
+        }
+
+        .primary-btn:hover {
+            background: #cbdcff;
+
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn:hover {
+            background: #e6e1ff;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           HERO ILLUSTRATION
+        ========================= */
+
+        .hero-image {
+            flex: 0 0 360px;
+
+            height: 260px;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #eef7ff,
+                #f1efff
+            );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 85px;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+            padding: 25px 8% 35px;
+
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 29px;
+
+            color: #263f6d;
+
+            margin-bottom: 8px;
+        }
+
+        .features-subtitle {
+            color: #71819b;
+
+            margin-bottom: 28px;
+        }
+
+        .feature-container {
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 25px;
+
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.94);
+
+            width: 31%;
+
+            min-width: 250px;
+
+            padding: 27px;
+
+            border-radius: 15px;
+
+            text-align: left;
+
+            box-shadow:
+                0 8px 25px rgba(70, 110, 160, 0.09);
+
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 30px rgba(70, 110, 160, 0.14);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #edf5ff;
+
+            color: #527de8;
+
+            font-size: 25px;
+
+            margin-bottom: 18px;
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: #f1efff;
+            color: #7565d5;
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: #eaf9f4;
+            color: #48a88a;
+        }
+
+        .feature-card h3 {
+            color: #294570;
+
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #71809a;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           ADMIN
+        ========================= */
+
+        .admin-section {
+            max-width: 1100px;
+
+            margin: 5px auto 35px;
+
+            padding: 25px 35px;
+
+            background: rgba(235, 241, 255, 0.9);
+
+            border-radius: 16px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .admin-section h2 {
+            color: #294570;
+
+            margin-bottom: 7px;
+        }
+
+        .admin-section p {
+            color: #71809a;
+        }
+
+        .admin-btn {
+            background: white;
+
+            color: #5272d5;
+
+            border: 1px solid #d7e2ff;
+
+            white-space: nowrap;
+        }
+
+        .admin-btn:hover {
+            background: #f3f6ff;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #26395e;
+
+            color: #dfe7f7;
+
+            text-align: center;
+
+            padding: 20px;
+
+            margin-top: 25px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                flex-direction: column;
+
+                gap: 15px;
+
+                padding: 20px;
+            }
+
+            nav ul {
+                gap: 18px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 25px 15px;
+            }
+
+            .hero-content {
+                flex-direction: column;
+
+                padding: 35px 25px;
+
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            .hero-image {
+                width: 100%;
+
+                flex-basis: auto;
+            }
+
+            .feature-card {
+                width: 100%;
+            }
+
+            .admin-section {
+                margin-left: 15px;
+                margin-right: 15px;
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <h2>🎓 Student Management System</h2>
+
+        <ul>
+
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li>
+                <a href="student-login.html">Login</a>
+            </li>
+
+            <li>
+                <a href="student-register.html">Register</a>
+            </li>
+
+            <li>
+                <a href="student-dashboard.html">Dashboard</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-text">
+
+                <div class="tag">
+                    ✦ Learn &nbsp;•&nbsp; Grow &nbsp;•&nbsp; Succeed
+                </div>
+
+                <h1>
+                    Welcome to <span>Student Management System</span>
+                </h1>
+
+                <p>
+                    Manage student details, registration and academic
+                    information through one simple and efficient platform.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="student-login.html"
+                        class="btn primary-btn"
+                    >
+                        👤 Student Login &nbsp; →
+                    </a>
+
+                    <a
+                        href="student-register.html"
+                        class="btn secondary-btn"
+                    >
+                        👤+ Register Now &nbsp; →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-image">
+                🎓📚
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section class="features">
+
+        <h2>Our Features</h2>
+
+        <p class="features-subtitle">
+            Everything you need to manage students, all in one place.
+        </p>
+
+
+        <div class="feature-container">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👤
+                </div>
+
+                <h3>
+                    Student Login
+                </h3>
+
+                <p>
+                    Students can securely access their account
+                    and dashboard.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👤+
+                </div>
+
+                <h3>
+                    Student Registration
+                </h3>
+
+                <p>
+                    Register students and maintain their basic
+                    information easily.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Student Dashboard
+                </h3>
+
+                <p>
+                    View student details and academic information
+                    in one place.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADMIN SECTION -->
+
+    <section class="admin-section">
+
+        <div>
+
+            <h2>
+                🛡️ Administrator Access
+            </h2>
+
+            <p>
+                Administrators can manage student information
+                through the administration panel.
+            </p>
+
+        </div>
+
+
+        <a
+            href="admin-login.html"
+            class="btn admin-btn"
+        >
+            🔐 Admin Login &nbsp; →
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Student Management System
+        </p>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
