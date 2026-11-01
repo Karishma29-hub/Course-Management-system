@@ -15,15 +15,19 @@ function Login() {
 
         try {
             const response = await api.post("/auth/login", {
-                email,
+                email: email.trim().toLowerCase(),
                 password
             });
+
+            // Debug: inspect the backend response
+            console.log("LOGIN RESPONSE:", response.data);
 
             sessionStorage.setItem("token", response.data.token);
 
             alert("Login successful!");
             navigate("/dashboard");
         } catch (error) {
+            console.error("LOGIN ERROR:", error.response?.data || error.message);
             alert(error.response?.data?.message || "Login failed!");
         }
     }
@@ -32,7 +36,7 @@ function Login() {
         <>
             <Navbar />
 
-            <div className="container">
+            <div className="container login-page">
                 <h1>Student Login</h1>
 
                 <form onSubmit={handleLogin}>

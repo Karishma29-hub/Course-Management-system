@@ -15,6 +15,12 @@ router.post(
 );
 
 router.post(
+    "/admin-register",
+    validateRegistration,
+    authController.registerAdmin
+);
+
+router.post(
     "/login",
     validateLogin,
     authController.login

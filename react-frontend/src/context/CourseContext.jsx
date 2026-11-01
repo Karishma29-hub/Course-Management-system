@@ -20,8 +20,7 @@ export function CourseProvider({ children }) {
             setLoading(true);
 
             const response = await api.get("/courses");
-
-            setCourses(response.data.data);
+            setCourses(response.data.data || []);
             setError(null);
         } catch (error) {
             console.error("Failed to fetch courses:", error);
@@ -37,9 +36,8 @@ export function CourseProvider({ children }) {
 
     async function addCourse(course) {
         const response = await api.post("/courses", course);
-
-        setCourses((previousCourses) => [
-            ...previousCourses,
+        setCourses((previous) => [
+            ...previous,
             response.data.data
         ]);
     }
@@ -50,9 +48,9 @@ export function CourseProvider({ children }) {
             updatedCourse
         );
 
-        setCourses((previousCourses) =>
-            previousCourses.map((course) =>
-                course.id === id
+        setCourses((previous) =>
+            previous.map((course) =>
+                String(course._id) === String(id)
                     ? response.data.data
                     : course
             )
@@ -62,9 +60,9 @@ export function CourseProvider({ children }) {
     async function deleteCourse(id) {
         await api.delete(`/courses/${id}`);
 
-        setCourses((previousCourses) =>
-            previousCourses.filter(
-                (course) => course.id !== Number(id)
+        setCourses((previous) =>
+            previous.filter(
+                (course) => String(course._id) !== String(id)
             )
         );
     }

@@ -1,138 +1,154 @@
-
-const courses = require("../data/courses");
+const Course = require("../models/Course");
 
 // Get all courses
-const getAllCourses = (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Courses fetched successfully",
-    data: courses
-  });
+const getAllCourses = async (req, res, next) => {
+    try {
+        const courses = await Course.find();
+
+        return res.status(200).json({
+            success: true,
+            message: "Courses fetched successfully",
+            data: courses
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 // Get course by ID
-const getCourseById = (req, res) => {
-  const course = courses.find(
-    c => c.id === Number(req.params.id)
-  );
+const getCourseById = async (req, res, next) => {
+    try {
+        const course = await Course.findById(req.params.id);
 
-  if (!course) {
-    return res.status(404).json({
-      success: false,
-      message: "Course not found"
-    });
-  }
+        if (!course) {
+            return res.status(404).json({
+                success: false,
+                message: "Course not found"
+            });
+        }
 
-  return res.status(200).json({
-    success: true,
-    data: course
-  });
+        return res.status(200).json({
+            success: true,
+            data: course
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
-// Create a new course with validation
-const createCourse = (req, res) => {
-  const { title, description, instructor, duration } = req.body || {};
+// Create a new course
+const createCourse = async (req, res, next) => {
+    try {
+        const { title, description, instructor, duration } = req.body || {};
 
-  if (
-    typeof title !== "string" || !title.trim() ||
-    typeof description !== "string" || !description.trim() ||
-    typeof instructor !== "string" || !instructor.trim() ||
-    typeof duration !== "string" || !duration.trim()
-  ) {
-    return res.status(400).json({
-      success: false,
-      message: "All course fields are required and must be valid"
-    });
-  }
+        if (
+            typeof title !== "string" || !title.trim() ||
+            typeof description !== "string" || !description.trim() ||
+            typeof instructor !== "string" || !instructor.trim() ||
+            typeof duration !== "string" || !duration.trim()
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "All course fields are required and must be valid"
+            });
+        }
 
-  const course = {
-    id: Date.now(),
-    title: title.trim(),
-    description: description.trim(),
-    instructor: instructor.trim(),
-    duration: duration.trim()
-  };
+        const course = await Course.create({
+            title: title.trim(),
+            description: description.trim(),
+            instructor: instructor.trim(),
+            duration: duration.trim()
+        });
 
-  courses.push(course);
-
-  return res.status(201).json({
-    success: true,
-    message: "Course created successfully",
-    data: course
-  });
+        return res.status(201).json({
+            success: true,
+            message: "Course created successfully",
+            data: course
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
-// Update a course with validation
-const updateCourse = (req, res) => {
-  const index = courses.findIndex(
-    c => c.id === Number(req.params.id)
-  );
+// Update a course
+const updateCourse = async (req, res, next) => {
+    try {
+        const { title, description, instructor, duration } = req.body || {};
 
-  if (index === -1) {
-    return res.status(404).json({
-      success: false,
-      message: "Course not found"
-    });
-  }
+        if (
+            (title !== undefined &&
+                (typeof title !== "string" || !title.trim())) ||
+            (description !== undefined &&
+                (typeof description !== "string" || !description.trim())) ||
+            (instructor !== undefined &&
+                (typeof instructor !== "string" || !instructor.trim())) ||
+            (duration !== undefined &&
+                (typeof duration !== "string" || !duration.trim()))
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "Course fields must contain valid, non-empty values"
+            });
+        }
 
-  const { title, description, instructor, duration } = req.body || {};
+        const updates = {};
 
-  if (
-    (title !== undefined &&
-      (typeof title !== "string" || !title.trim())) ||
-    (description !== undefined &&
-      (typeof description !== "string" || !description.trim())) ||
-    (instructor !== undefined &&
-      (typeof instructor !== "string" || !instructor.trim())) ||
-    (duration !== undefined &&
-      (typeof duration !== "string" || !duration.trim()))
-  ) {
-    return res.status(400).json({
-      success: false,
-      message: "Course fields must contain valid, non-empty values"
-    });
-  }
+        if (title !== undefined) updates.title = title.trim();
+        if (description !== undefined) updates.description = description.trim();
+        if (instructor !== undefined) updates.instructor = instructor.trim();
+        if (duration !== undefined) updates.duration = duration.trim();
 
-  courses[index] = {
-    ...courses[index],
-    ...(title !== undefined && { title: title.trim() }),
-    ...(description !== undefined && { description: description.trim() }),
-    ...(instructor !== undefined && { instructor: instructor.trim() }),
-    ...(duration !== undefined && { duration: duration.trim() })
-  };
+        const course = await Course.findByIdAndUpdate(
+            req.params.id,
+            updates,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
 
-  return res.status(200).json({
-    success: true,
-    message: "Course updated successfully",
-    data: courses[index]
-  });
+        if (!course) {
+            return res.status(404).json({
+                success: false,
+                message: "Course not found"
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Course updated successfully",
+            data: course
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 // Delete a course
-const deleteCourse = (req, res) => {
-  const index = courses.findIndex(
-    c => c.id === Number(req.params.id)
-  );
+const deleteCourse = async (req, res, next) => {
+    try {
+        const course = await Course.findByIdAndDelete(req.params.id);
 
-  if (index === -1) {
-    return res.status(404).json({
-      success: false,
-      message: "Course not found"
-    });
-  }
+        if (!course) {
+            return res.status(404).json({
+                success: false,
+                message: "Course not found"
+            });
+        }
 
-  courses.splice(index, 1);
-
-  return res.status(200).json({
-    success: true,
-    message: "Course deleted successfully"
-  });
+        return res.status(200).json({
+            success: true,
+            message: "Course deleted successfully"
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 module.exports = {
-  getAllCourses,
-  getCourseById,
-  createCourse,
-  updateCourse,
-  deleteCourse
+    getAllCourses,
+    getCourseById,
+    createCourse,
+    updateCourse,
+    deleteCourse
 };

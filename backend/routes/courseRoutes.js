@@ -1,21 +1,24 @@
-
 const express = require("express");
 const router = express.Router();
 
 const {
-  getAllCourses,
-  getCourseById,
-  createCourse,
-  updateCourse,
-  deleteCourse
+    getAllCourses,
+    getCourseById,
+    createCourse,
+    updateCourse,
+    deleteCourse
 } = require("../controllers/courseController");
 
 const authMiddleware = require("../middleware/authMiddleware");
+const adminMiddleware = require("../middleware/adminMiddleware");
 
+// Public: students and visitors can view courses
 router.get("/", getAllCourses);
 router.get("/:id", getCourseById);
-router.post("/", authMiddleware, createCourse);
-router.put("/:id", authMiddleware, updateCourse);
-router.delete("/:id", authMiddleware, deleteCourse);
+
+// Admin only: manage courses
+router.post("/", authMiddleware, adminMiddleware, createCourse);
+router.put("/:id", authMiddleware, adminMiddleware, updateCourse);
+router.delete("/:id", authMiddleware, adminMiddleware, deleteCourse);
 
 module.exports = router;

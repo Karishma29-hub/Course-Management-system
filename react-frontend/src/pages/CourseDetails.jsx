@@ -1,8 +1,8 @@
-
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import api from "../services/api";
 
 function CourseDetails() {
     const location = useLocation();
@@ -85,6 +85,8 @@ function CourseDetails() {
 
     const [showCourses, setShowCourses] = useState(false);
     const [selectedCourse, setSelectedCourse] = useState(null);
+    const [savingProgress, setSavingProgress] = useState(false);
+    const [progressError, setProgressError] = useState("");
 
     const [completedLessons, setCompletedLessons] = useState(() => {
         const saved = localStorage.getItem("completed_" + courseName);
@@ -93,7 +95,6 @@ function CourseDetails() {
 
     function calculateProgress(completed) {
         if (courses.length === 0) return 0;
-
         return Math.round((completed.length / courses.length) * 100);
     }
 
@@ -105,46 +106,83 @@ function CourseDetails() {
                 progress: calculateProgress(completedLessons)
             })
         );
-
         setShowCourses(true);
     }
 
     function handleCourseClick(course) {
         setSelectedCourse(course);
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        setProgressError("");
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function handleComplete() {
+    async function handleComplete() {
         if (
             !selectedCourse ||
-            completedLessons.includes(selectedCourse.name)
+            completedLessons.includes(selectedCourse.name) ||
+            savingProgress
         ) {
             return;
         }
+
+        setSavingProgress(true);
+        setProgressError("");
 
         const updatedCompletedLessons = [
             ...completedLessons,
             selectedCourse.name
         ];
 
-        setCompletedLessons(updatedCompletedLessons);
+        try {
+            // Find the matching MongoDB course document by its name.
+            const courseResponse = await api.get("/courses");
+            const courseList =
+                courseResponse.data.courses ||
+                courseResponse.data.data ||
+                courseResponse.data;
 
-        localStorage.setItem(
-            "completed_" + courseName,
-            JSON.stringify(updatedCompletedLessons)
-        );
+            const matchingCourse = Array.isArray(courseList)
+                ? courseList.find((course) => course.title === courseName)
+                : null;
 
-        localStorage.setItem(
-            "startedCourse",
-            JSON.stringify({
-                courseName,
-                progress: calculateProgress(updatedCompletedLessons)
-            })
-        );
+            if (!matchingCourse) {
+                throw new Error(
+                    "Course not found in the database. Please check the course title."
+                );
+            }
+
+            await api.put("/students/progress", {
+                courseId: matchingCourse._id,
+                completedLessons: updatedCompletedLessons.length,
+                totalLessons: courses.length
+            });
+
+            setCompletedLessons(updatedCompletedLessons);
+
+            localStorage.setItem(
+                "completed_" + courseName,
+                JSON.stringify(updatedCompletedLessons)
+            );
+
+            localStorage.setItem(
+                "startedCourse",
+                JSON.stringify({
+                    courseName,
+                    progress: calculateProgress(updatedCompletedLessons)
+                })
+            );
+        } catch (error) {
+            console.error(
+                "Progress save error:",
+                error.response?.data || error.message
+            );
+            setProgressError(
+                error.response?.data?.message ||
+                error.message ||
+                "Unable to save progress."
+            );
+        } finally {
+            setSavingProgress(false);
+        }
     }
 
     const overallProgress = calculateProgress(completedLessons);
@@ -155,22 +193,15 @@ function CourseDetails() {
 
             <div className="container">
                 <div className="course-header">
-                    <span className="course-badge">
-                        📚 Learning Course
-                    </span>
-
+                    <span className="course-badge">📚 Learning Course</span>
                     <h1>{courseName}</h1>
-
                     <p>
                         Explore the course topics, watch lessons and track your learning progress.
                     </p>
                 </div>
 
                 {!showCourses && (
-                    <button
-                        className="enroll-button"
-                        onClick={handleEnroll}
-                    >
+                    <button className="enroll-button" onClick={handleEnroll}>
                         Enroll Now →
                     </button>
                 )}
@@ -178,7 +209,6 @@ function CourseDetails() {
                 {showCourses && (
                     <div className="course-list">
                         <h2>Course Topics</h2>
-
                         <p>Select a topic to start learning.</p>
 
                         {courses.map((course, index) => (
@@ -193,7 +223,6 @@ function CourseDetails() {
 
                                 <div className="course-info">
                                     <h3>{course.name}</h3>
-
                                     <span>
                                         {completedLessons.includes(course.name)
                                             ? "Completed ✓"
@@ -214,7 +243,6 @@ function CourseDetails() {
                         </div>
 
                         <h2>{selectedCourse.name}</h2>
-
                         <p>Course Lesson</p>
 
                         <div className="video-container">
@@ -230,10 +258,7 @@ function CourseDetails() {
 
                         <div className="progress-section">
                             <div className="progress-heading">
-                                <span>
-                                    {selectedCourse.name} Progress
-                                </span>
-
+                                <span>{selectedCourse.name} Progress</span>
                                 <strong>
                                     {completedLessons.includes(selectedCourse.name)
                                         ? "100%"
@@ -255,12 +280,21 @@ function CourseDetails() {
                             <button
                                 className="enroll-button"
                                 onClick={handleComplete}
-                                disabled={completedLessons.includes(selectedCourse.name)}
+                                disabled={
+                                    completedLessons.includes(selectedCourse.name) ||
+                                    savingProgress
+                                }
                             >
-                                {completedLessons.includes(selectedCourse.name)
+                                {savingProgress
+                                    ? "Saving..."
+                                    : completedLessons.includes(selectedCourse.name)
                                     ? "Completed ✓"
                                     : "Mark as Completed"}
                             </button>
+
+                            {progressError && (
+                                <p className="progress-message">{progressError}</p>
+                            )}
 
                             <p className="progress-message">
                                 {completedLessons.includes(selectedCourse.name)
@@ -290,7 +324,6 @@ function CourseDetails() {
                         {overallProgress === 100 && (
                             <div className="course-card">
                                 <h2>🎉 Course Completed!</h2>
-
                                 <p>
                                     Congratulations! You have successfully completed the {courseName} course.
                                 </p>
