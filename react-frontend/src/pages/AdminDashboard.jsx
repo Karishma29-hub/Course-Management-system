@@ -6,6 +6,9 @@ import api from "../services/api";
 
 function AdminDashboard() {
     const [selectedSection, setSelectedSection] = useState("");
+    const [showRegisteredStudents, setShowRegisteredStudents] = useState(false);
+    const [showAvailableCourses, setShowAvailableCourses] = useState(false);
+
     const [students, setStudents] = useState([]);
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -171,6 +174,7 @@ function AdminDashboard() {
                     `/courses/${editingCourseId}`,
                     courseForm
                 );
+
                 setMessage("Course updated successfully.");
             } else {
                 await api.post("/courses", courseForm);
@@ -249,8 +253,12 @@ function AdminDashboard() {
                         <div className="admin-card-icon">👨‍🎓</div>
                         <h3>Manage Students</h3>
                         <p>View and manage student information.</p>
+
                         <button
-                            onClick={() => setSelectedSection("students")}
+                            onClick={() => {
+                                setSelectedSection("students");
+                                setShowRegisteredStudents(false);
+                            }}
                         >
                             View Students
                         </button>
@@ -260,8 +268,12 @@ function AdminDashboard() {
                         <div className="admin-card-icon">📚</div>
                         <h3>Manage Courses</h3>
                         <p>Add, edit and delete courses.</p>
+
                         <button
-                            onClick={() => setSelectedSection("courses")}
+                            onClick={() => {
+                                setSelectedSection("courses");
+                                setShowAvailableCourses(false);
+                            }}
                         >
                             Manage Courses
                         </button>
@@ -271,6 +283,7 @@ function AdminDashboard() {
                         <div className="admin-card-icon">📊</div>
                         <h3>System Overview</h3>
                         <p>View overall system information.</p>
+
                         <button
                             onClick={() => setSelectedSection("overview")}
                         >
@@ -347,46 +360,70 @@ function AdminDashboard() {
                             )}
                         </form>
 
-                        <hr />
+                        {/* View Registered Students Button */}
+                        <button
+                            type="button"
+                            onClick={() =>
+                                setShowRegisteredStudents(
+                                    !showRegisteredStudents
+                                )
+                            }
+                        >
+                            {showRegisteredStudents
+                                ? "Hide Registered Students"
+                                : "View Registered Students"}
+                        </button>
 
-                        <h3>Registered Students</h3>
+                        <br /><br />
 
-                        {students.length === 0 ? (
-                            <p>No students found.</p>
-                        ) : (
-                            students.map((student) => (
-                                <div key={student._id}>
-                                    <hr />
-                                    <p>
-                                        <b>Name:</b> {student.name}
-                                    </p>
-                                    <p>
-                                        <b>Email:</b> {student.email}
-                                    </p>
-                                    <p>
-                                        <b>Department:</b>{" "}
-                                        {student.department}
-                                    </p>
+                        {/* Registered Students List */}
+                        {showRegisteredStudents && (
+                            <>
+                                <h3>Registered Students</h3>
 
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            handleStudentEdit(student)
-                                        }
-                                    >
-                                        Edit
-                                    </button>
+                                {students.length === 0 ? (
+                                    <p>No students found.</p>
+                                ) : (
+                                    students.map((student) => (
+                                        <div key={student._id}>
+                                            <hr />
 
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            handleStudentDelete(student._id)
-                                        }
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            ))
+                                            <p>
+                                                <b>Name:</b> {student.name}
+                                            </p>
+
+                                            <p>
+                                                <b>Email:</b> {student.email}
+                                            </p>
+
+                                            <p>
+                                                <b>Department:</b>{" "}
+                                                {student.department}
+                                            </p>
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleStudentEdit(student)
+                                                }
+                                            >
+                                                Edit
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleStudentDelete(
+                                                        student._id
+                                                    )
+                                                }
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    ))
+                                )}
+                            </>
                         )}
                     </div>
                 )}
@@ -455,46 +492,69 @@ function AdminDashboard() {
                             )}
                         </form>
 
-                        <hr />
+                        {/* View Available Courses Button */}
+                        <button
+                            type="button"
+                            onClick={() =>
+                                setShowAvailableCourses(
+                                    !showAvailableCourses
+                                )
+                            }
+                        >
+                            {showAvailableCourses
+                                ? "Hide Available Courses"
+                                : "View Available Courses"}
+                        </button>
 
-                        <h3>Available Courses</h3>
+                        <br /><br />
 
-                        {courses.length === 0 ? (
-                            <p>No courses found.</p>
-                        ) : (
-                            courses.map((course) => (
-                                <div key={course._id}>
-                                    <hr />
-                                    <h3>{course.title}</h3>
-                                    <p>{course.description}</p>
-                                    <p>
-                                        <b>Instructor:</b>{" "}
-                                        {course.instructor}
-                                    </p>
-                                    <p>
-                                        <b>Duration:</b>{" "}
-                                        {course.duration}
-                                    </p>
+                        {/* Available Courses List */}
+                        {showAvailableCourses && (
+                            <>
+                                <h3>Available Courses</h3>
 
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            handleCourseEdit(course)
-                                        }
-                                    >
-                                        Edit
-                                    </button>
+                                {courses.length === 0 ? (
+                                    <p>No courses found.</p>
+                                ) : (
+                                    courses.map((course) => (
+                                        <div key={course._id}>
+                                            <hr />
 
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            handleCourseDelete(course._id)
-                                        }
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            ))
+                                            <h3>{course.title}</h3>
+
+                                            <p>{course.description}</p>
+
+                                            <p>
+                                                <b>Instructor:</b>{" "}
+                                                {course.instructor}
+                                            </p>
+
+                                            <p>
+                                                <b>Duration:</b>{" "}
+                                                {course.duration}
+                                            </p>
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleCourseEdit(course)
+                                                }
+                                            >
+                                                Edit
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleCourseDelete(course._id)
+                                                }
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    ))
+                                )}
+                            </>
                         )}
                     </div>
                 )}
@@ -503,12 +563,15 @@ function AdminDashboard() {
                 {selectedSection === "overview" && (
                     <div className="course-card">
                         <h2>📊 System Overview</h2>
+
                         <p>
                             <b>Total Students:</b> {students.length}
                         </p>
+
                         <p>
                             <b>Total Courses:</b> {courses.length}
                         </p>
+
                         <p>
                             <b>System Status:</b> Active
                         </p>

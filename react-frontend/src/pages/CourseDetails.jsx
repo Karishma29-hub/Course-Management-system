@@ -1,3 +1,4 @@
+
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
@@ -78,6 +79,75 @@ function CourseDetails() {
                 icon: "🧠",
                 video: "https://www.youtube.com/embed/aircAruvnKk"
             }
+        ],
+
+        "Data Science": [
+            {
+                name: "Introduction to Data Science",
+                icon: "📊",
+                video: "https://www.youtube.com/embed/ua-CiDNNj30"
+            },
+            {
+                name: "Python for Data Analysis",
+                icon: "🐍",
+                video: "https://www.youtube.com/embed/r-uOLxNrNk8"
+            },
+            {
+                name: "Data Visualization",
+                icon: "📈",
+                video: "https://www.youtube.com/embed/GPVsHOlRBBI"
+            },
+            {
+                name: "Statistics and Data Analysis",
+                icon: "📉",
+                video: "https://www.youtube.com/embed/xxpc-HPKN28"
+            }
+        ],
+
+        "Machine Learning": [
+            {
+                name: "Introduction to Machine Learning",
+                icon: "🤖",
+                video: "https://www.youtube.com/embed/ukzFI9rgwfU"
+            },
+            {
+                name: "Supervised Learning",
+                icon: "🎯",
+                video: "https://www.youtube.com/embed/4qVRBYAdLAo"
+            },
+            {
+                name: "Unsupervised Learning",
+                icon: "🔍",
+                video: "https://www.youtube.com/embed/azXCzI57Yfc"
+            },
+            {
+                name: "Model Training and Prediction",
+                icon: "🧠",
+                video: "https://www.youtube.com/embed/GwIo3gDZCVQ"
+            }
+        ],
+
+        "Cybersecurity": [
+            {
+                name: "Introduction to Cybersecurity",
+                icon: "🔐",
+                video: "https://www.youtube.com/embed/inWWhr5tnEA"
+            },
+            {
+                name: "Network Security Basics",
+                icon: "🌐",
+                video: "https://www.youtube.com/embed/qiQR5rTSshw"
+            },
+            {
+                name: "Cyber Threats and Attacks",
+                icon: "⚠️",
+                video: "https://www.youtube.com/embed/Dk-ZqQ-bfy4"
+            },
+            {
+                name: "Data Protection and Security",
+                icon: "🛡️",
+                video: "https://www.youtube.com/embed/AuYNXgO_f3Y"
+            }
         ]
     };
 
@@ -133,8 +203,8 @@ function CourseDetails() {
         ];
 
         try {
-            // Find the matching MongoDB course document by its name.
             const courseResponse = await api.get("/courses");
+
             const courseList =
                 courseResponse.data.courses ||
                 courseResponse.data.data ||
@@ -175,6 +245,7 @@ function CourseDetails() {
                 "Progress save error:",
                 error.response?.data || error.message
             );
+
             setProgressError(
                 error.response?.data?.message ||
                 error.message ||
@@ -191,7 +262,7 @@ function CourseDetails() {
         <>
             <Navbar />
 
-            <div className="container">
+            <div className="container course-details-page">
                 <div className="course-header">
                     <span className="course-badge">📚 Learning Course</span>
                     <h1>{courseName}</h1>

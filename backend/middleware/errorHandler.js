@@ -1,9 +1,24 @@
 
 const errorHandler = (err, req, res, next) => {
-    console.error(err);
+    // Pass errors onward if the response has already started
+    if (res.headersSent) {
+        return next(err);
+    }
+
+    // Log the error on the server
+    console.error("Request error:", err.stack || err.message);
 
     let statusCode = err.statusCode || err.status || 500;
     let message = err.message || "Internal Server Error";
+
+    // Ensure the status code is valid
+    if (
+        !Number.isInteger(statusCode) ||
+        statusCode < 400 ||
+        statusCode > 599
+    ) {
+        statusCode = 500;
+    }
 
     // MongoDB duplicate key error
     if (err.code === 11000) {
@@ -31,8 +46,8 @@ const errorHandler = (err, req, res, next) => {
         message = "Invalid identifier";
     }
 
-    // Unexpected server errors
-    else if (statusCode >= 500) {
+    // Hide unexpected internal server error details
+    if (statusCode >= 500) {
         statusCode = 500;
         message = "Internal server error";
     }

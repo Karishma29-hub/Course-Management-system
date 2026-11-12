@@ -13,7 +13,7 @@ function CourseCard({ courseName, description, image }) {
     }
 
     return (
-        <div className="course-card">
+        <div className="course-list-card">
             {image && (
                 <img
                     src={image}

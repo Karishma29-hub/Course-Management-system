@@ -15,12 +15,35 @@ export function CourseProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    async function fetchCourses() {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [totalCourses, setTotalCourses] = useState(0);
+
+    const limit = 10;
+
+    // Fetch courses with pagination
+    async function fetchCourses(page = 1) {
         try {
             setLoading(true);
 
-            const response = await api.get("/courses");
+            const response = await api.get(
+                `/courses?page=${page}&limit=${limit}`
+            );
+
             setCourses(response.data.data || []);
+
+            setCurrentPage(
+                response.data.pagination?.currentPage || page
+            );
+
+            setTotalPages(
+                response.data.pagination?.totalPages || 1
+            );
+
+            setTotalCourses(
+                response.data.pagination?.totalCourses || 0
+            );
+
             setError(null);
         } catch (error) {
             console.error("Failed to fetch courses:", error);
@@ -31,40 +54,31 @@ export function CourseProvider({ children }) {
     }
 
     useEffect(() => {
-        fetchCourses();
+        fetchCourses(1);
     }, []);
 
+    // Add a course
     async function addCourse(course) {
-        const response = await api.post("/courses", course);
-        setCourses((previous) => [
-            ...previous,
-            response.data.data
-        ]);
+        await api.post("/courses", course);
+        await fetchCourses(currentPage);
     }
 
+    // Update a course
     async function updateCourse(id, updatedCourse) {
-        const response = await api.put(
-            `/courses/${id}`,
-            updatedCourse
-        );
-
-        setCourses((previous) =>
-            previous.map((course) =>
-                String(course._id) === String(id)
-                    ? response.data.data
-                    : course
-            )
-        );
+        await api.put(`/courses/${id}`, updatedCourse);
+        await fetchCourses(currentPage);
     }
 
+    // Delete a course
     async function deleteCourse(id) {
         await api.delete(`/courses/${id}`);
 
-        setCourses((previous) =>
-            previous.filter(
-                (course) => String(course._id) !== String(id)
-            )
-        );
+        const pageToLoad =
+            courses.length === 1 && currentPage > 1
+                ? currentPage - 1
+                : currentPage;
+
+        await fetchCourses(pageToLoad);
     }
 
     return (
@@ -73,6 +87,9 @@ export function CourseProvider({ children }) {
                 courses,
                 loading,
                 error,
+                currentPage,
+                totalPages,
+                totalCourses,
                 fetchCourses,
                 addCourse,
                 updateCourse,

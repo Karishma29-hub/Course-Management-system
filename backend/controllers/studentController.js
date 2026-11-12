@@ -1,27 +1,36 @@
+
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
+// Get all students
 async function getAllStudents(req, res, next) {
     try {
         const students = await User.find({ role: "student" })
-            .select("-passwordHash");
+            .select("-passwordHash")
+            .sort({ createdAt: -1 })
+            .limit(100)
+            .lean();
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             count: students.length,
             students
         });
+
     } catch (error) {
         next(error);
     }
 }
 
+// Get student by ID
 async function getStudentById(req, res, next) {
     try {
         const student = await User.findOne({
             _id: req.params.id,
             role: "student"
-        }).select("-passwordHash");
+        })
+            .select("-passwordHash")
+            .lean();
 
         if (!student) {
             return res.status(404).json({
@@ -30,24 +39,29 @@ async function getStudentById(req, res, next) {
             });
         }
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             student
         });
+
     } catch (error) {
         next(error);
     }
 }
 
+// Create student
 async function createStudent(req, res, next) {
     try {
         const { name, email, password, department } = req.body;
 
         if (
-            typeof name !== "string" || !name.trim() ||
-            typeof email !== "string" || !email.trim() ||
+            typeof name !== "string" ||
+            typeof email !== "string" ||
             typeof password !== "string" ||
-            typeof department !== "string" || !department.trim()
+            typeof department !== "string" ||
+            !name.trim() ||
+            !email.trim() ||
+            !department.trim()
         ) {
             return res.status(400).json({
                 success: false,
@@ -64,14 +78,23 @@ async function createStudent(req, res, next) {
             });
         }
 
-        if (password.length < 8 || password.length > 72) {
+        if (
+            name.trim().length < 2 ||
+            name.trim().length > 80 ||
+            department.trim().length < 2 ||
+            department.trim().length > 100 ||
+            password.length < 12 ||
+            password.length > 72
+        ) {
             return res.status(400).json({
                 success: false,
-                message: "Password must be 8-72 characters"
+                message: "Invalid student details or password length"
             });
         }
 
-        const duplicate = await User.findOne({ email: normalizedEmail });
+        const duplicate = await User.findOne({
+            email: normalizedEmail
+        });
 
         if (duplicate) {
             return res.status(409).json({
@@ -90,7 +113,7 @@ async function createStudent(req, res, next) {
             role: "student"
         });
 
-        res.status(201).json({
+        return res.status(201).json({
             success: true,
             message: "Student created successfully",
             student: {
@@ -102,24 +125,43 @@ async function createStudent(req, res, next) {
                 createdAt: student.createdAt
             }
         });
+
     } catch (error) {
         next(error);
     }
 }
 
+// Update student
 async function updateStudent(req, res, next) {
     try {
-        const { name, email, department } = req.body;
+        const { name, email, department } = req.body || {};
         const updates = {};
 
         if (
+            name === undefined &&
+            email === undefined &&
+            department === undefined
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "At least one field must be provided"
+            });
+        }
+
+        if (
             (name !== undefined &&
-                (typeof name !== "string" || !name.trim())) ||
+                (typeof name !== "string" ||
+                    name.trim().length < 2 ||
+                    name.trim().length > 80)) ||
+
             (email !== undefined &&
                 (typeof email !== "string" ||
-                 !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))) ||
+                    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))) ||
+
             (department !== undefined &&
-                (typeof department !== "string" || !department.trim()))
+                (typeof department !== "string" ||
+                    department.trim().length < 2 ||
+                    department.trim().length > 100))
         ) {
             return res.status(400).json({
                 success: false,
@@ -127,16 +169,24 @@ async function updateStudent(req, res, next) {
             });
         }
 
-        if (name !== undefined) updates.name = name.trim();
-        if (email !== undefined) updates.email = email.trim().toLowerCase();
-        if (department !== undefined) updates.department = department.trim();
+        if (name !== undefined) {
+            updates.name = name.trim();
+        }
+
+        if (email !== undefined) {
+            updates.email = email.trim().toLowerCase();
+        }
+
+        if (department !== undefined) {
+            updates.department = department.trim();
+        }
 
         const student = await User.findOneAndUpdate(
             {
                 _id: req.params.id,
                 role: "student"
             },
-            updates,
+            { $set: updates },
             {
                 new: true,
                 runValidators: true
@@ -150,16 +200,18 @@ async function updateStudent(req, res, next) {
             });
         }
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Student updated successfully",
             student
         });
+
     } catch (error) {
         next(error);
     }
 }
 
+// Delete student
 async function deleteStudent(req, res, next) {
     try {
         const student = await User.findOneAndDelete({
@@ -174,10 +226,11 @@ async function deleteStudent(req, res, next) {
             });
         }
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Student deleted successfully"
         });
+
     } catch (error) {
         next(error);
     }

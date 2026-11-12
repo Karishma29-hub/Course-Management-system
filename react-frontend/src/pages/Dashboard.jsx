@@ -42,7 +42,8 @@ function Dashboard() {
         <>
             <Navbar />
 
-            <div className="container">
+            <div className="container student-dashboard">
+
                 <h1>Student Dashboard</h1>
 
                 <button
@@ -61,6 +62,8 @@ function Dashboard() {
                     Logout
                 </button>
 
+                {/* STUDENT PROFILE */}
+
                 <h3>Student Profile</h3>
 
                 <p>
@@ -75,10 +78,13 @@ function Dashboard() {
                     <b>Course:</b> Computer Science with AI
                 </p>
 
+                {/* MY LEARNING */}
+
                 <h3>My Learning</h3>
 
                 {startedCourse ? (
                     <div className="course-card">
+
                         <h2>📚 {startedCourse.courseName}</h2>
 
                         <p>Overall Course Progress</p>
@@ -96,25 +102,44 @@ function Dashboard() {
 
                         <hr />
 
+                        {/* COMPLETED TOPICS */}
+
                         <h3>Completed Topics</h3>
 
                         {completedLessons.length === 0 ? (
                             <p>No topics completed yet.</p>
                         ) : (
-                            completedLessons.map((lesson, index) => (
-                                <p key={index}>✅ {lesson}</p>
-                            ))
+                            <div className="completed-topics">
+
+                                {completedLessons.map((lesson, index) => (
+                                    <div
+                                        className="completed-topic"
+                                        key={index}
+                                    >
+                                        <span className="topic-check">
+                                            ✓
+                                        </span>
+
+                                        <span>{lesson}</span>
+                                    </div>
+                                ))}
+
+                            </div>
                         )}
 
-                        <p>
+                        {/* LEARNING MESSAGE */}
+
+                        <div className="learning-message">
                             {progress === 100
                                 ? "🎉 Course completed successfully!"
                                 : "Keep learning and complete the remaining topics."}
-                        </p>
+                        </div>
+
                     </div>
                 ) : (
                     <p>You have not started any course yet.</p>
                 )}
+
             </div>
 
             <Footer />

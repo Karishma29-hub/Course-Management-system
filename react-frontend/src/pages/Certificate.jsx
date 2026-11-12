@@ -16,7 +16,7 @@ function Certificate() {
         <>
             <Navbar />
 
-            <div className="certificate-page">
+            <div className="certificate-page certificate-theme">
 
                 <div className="certificate">
 

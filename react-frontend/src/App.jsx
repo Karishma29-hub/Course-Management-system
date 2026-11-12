@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -11,6 +12,9 @@ import AdminRegister from "./pages/AdminRegister";
 import AdminDashboard from "./pages/AdminDashboard";
 import Certificate from "./pages/Certificate";
 
+// New components
+import Chat from "./components/Chat";
+import Notifications from "./components/Notifications";
 
 function App() {
     return (
@@ -26,6 +30,8 @@ function App() {
                 <Route path="/admin-register" element={<AdminRegister />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/certificate" element={<Certificate />} />
+                <Route path="/chat" element={<Chat />} />
+                <Route path="/notifications" element={<Notifications />} />
             </Routes>
         </BrowserRouter>
     );

@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import api from "../services/api";
@@ -22,12 +22,17 @@ function Login() {
             // Debug: inspect the backend response
             console.log("LOGIN RESPONSE:", response.data);
 
+            // Save login details
             sessionStorage.setItem("token", response.data.token);
+            sessionStorage.setItem("userId", response.data.user.id);
 
             alert("Login successful!");
             navigate("/dashboard");
         } catch (error) {
-            console.error("LOGIN ERROR:", error.response?.data || error.message);
+            console.error(
+                "LOGIN ERROR:",
+                error.response?.data || error.message
+            );
             alert(error.response?.data?.message || "Login failed!");
         }
     }
@@ -58,6 +63,11 @@ function Login() {
 
                     <button type="submit">Login</button>
                 </form>
+
+                <p className="register-link">
+                    Don't have an account?{" "}
+                    <Link to="/register">Register here</Link>
+                </p>
             </div>
 
             <Footer />

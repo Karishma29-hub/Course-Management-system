@@ -1,27 +1,50 @@
-import Navbar from "../components/Navbar";
-console.log("MY HOME FILE IS RUNNING");
 
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-
     const navigate = useNavigate();
+
+    const courses = [
+        {
+            icon: "🐍",
+            category: "PROGRAMMING",
+            title: "Python Programming",
+            description:
+                "Learn Python fundamentals, programming concepts, loops, functions and object-oriented programming.",
+            courseName: "Python Programming"
+        },
+        {
+            icon: "🤖",
+            category: "EMERGING TECHNOLOGY",
+            title: "Artificial Intelligence",
+            description:
+                "Explore machine learning, natural language processing, deep learning and computer vision.",
+            courseName: "Artificial Intelligence"
+        },
+        {
+            icon: "🌐",
+            category: "WEB TECHNOLOGY",
+            title: "Web Development",
+            description:
+                "Learn HTML, CSS, JavaScript, responsive web design and React.",
+            courseName: "Web Development"
+        }
+    ];
 
     return (
         <>
             <Navbar />
 
-            <div className="home-page">
+            <main className="home-page">
 
                 {/* HERO SECTION */}
-
                 <section className="hero-section">
-
                     <div className="hero-content">
 
                         <span className="welcome-badge">
-                            ✨ Welcome to your learning space
+                            ✨ YOUR LEARNING JOURNEY STARTS HERE
                         </span>
 
                         <h1>
@@ -31,230 +54,130 @@ function Home() {
                         </h1>
 
                         <p>
-                            Manage students, explore courses and
-                            track your academic learning journey
-                            in one simple platform.
+                            A simple platform to manage student activities,
+                            explore learning opportunities and keep track
+                            of your academic progress.
                         </p>
 
                         <div className="hero-buttons">
-
                             <button
                                 className="primary-button"
-                                onClick={() =>
-                                    navigate("/login")
-                                }
+                                onClick={() => navigate("/login")}
                             >
-                                👨‍🎓 Student Login →
+                                👨‍🎓 Student Login <span>→</span>
                             </button>
 
                             <button
                                 className="secondary-button"
-                                onClick={() =>
-                                    navigate("/admin-login")
-                                }
+                                onClick={() => navigate("/admin-login")}
                             >
-                                🛡️ Admin Login →
+                                🛡️ Admin Login <span>→</span>
                             </button>
-
                         </div>
 
+                        <div className="hero-note">
+                            Learn. Manage. Grow.
+                        </div>
                     </div>
 
-                    <div className="hero-icon">
-                        🎓
+                    <div className="hero-visual">
+                        <div className="hero-icon">🎓</div>
+                        <span className="hero-visual-label">
+                            YOUR ACADEMIC SPACE
+                        </span>
                     </div>
-
                 </section>
 
-
-                {/* FEATURES */}
-
+                {/* FEATURES SECTION */}
                 <section className="features-section">
 
-                    <h2>Everything You Need</h2>
-
-                    <p className="features-subtitle">
-                        Simple tools to manage your academic journey
-                    </p>
+                    <div className="section-heading">
+                        <span className="section-label">OUR PLATFORM</span>
+                        <h2>Everything You Need</h2>
+                        <p className="features-subtitle">
+                            Simple tools to manage your academic journey
+                        </p>
+                    </div>
 
                     <div className="features-grid">
 
                         <div className="feature-card">
-
-                            <div className="feature-icon">
-                                👨‍🎓
-                            </div>
-
-                            <h3>
-                                Student Management
-                            </h3>
-
+                            <div className="feature-icon">👨‍🎓</div>
+                            <h3>Student Management</h3>
                             <p>
-                                Manage student information
-                                quickly and efficiently.
+                                Manage student information and keep
+                                academic details organised.
                             </p>
-
                         </div>
 
-
                         <div className="feature-card">
-
-                            <div className="feature-icon">
-                                📚
-                            </div>
-
-                            <h3>
-                                Online Courses
-                            </h3>
-
+                            <div className="feature-icon">📚</div>
+                            <h3>Online Courses</h3>
                             <p>
-                                Explore courses and learn
-                                new technical skills.
+                                Explore available courses and develop
+                                useful technical skills.
                             </p>
-
                         </div>
 
-
                         <div className="feature-card">
-
-                            <div className="feature-icon">
-                                📊
-                            </div>
-
-                            <h3>
-                                Track Progress
-                            </h3>
-
+                            <div className="feature-icon">📊</div>
+                            <h3>Track Progress</h3>
                             <p>
-                                Monitor your learning progress
-                                and course completion.
+                                Monitor your learning activity and
+                                follow your course completion.
                             </p>
-
                         </div>
 
                     </div>
-
                 </section>
 
-
-                {/* COURSES */}
-
+                {/* COURSES SECTION */}
                 <section className="courses-home-section">
 
-                    <h2>Explore Our Courses</h2>
-
-                    <p className="features-subtitle">
-                        Choose a course and start learning
-                    </p>
+                    <div className="section-heading">
+                        <span className="section-label">START LEARNING</span>
+                        <h2>Explore Our Courses</h2>
+                        <p className="features-subtitle">
+                            Find a subject that interests you and start learning
+                        </p>
+                    </div>
 
                     <div className="home-courses-grid">
 
-                        <div className="home-course-card">
+                        {courses.map((course) => (
+                            <div className="home-course-card" key={course.courseName}>
 
-                            <div className="home-course-icon">
-                                💻
-                            </div>
+                                <div className="home-course-icon">
+                                    {course.icon}
+                                </div>
 
-                            <h3>
-                                Computer Science
-                            </h3>
+                                <span className="course-category">
+                                    {course.category}
+                                </span>
 
-                            <p>
-                                Learn programming, data structures,
-                                databases and computer science concepts.
-                            </p>
+                                <h3>{course.title}</h3>
 
-                            <button
-                                onClick={() =>
-                                    navigate(
-                                        "/course-details",
-                                        {
+                                <p>{course.description}</p>
+
+                                <button
+                                    onClick={() =>
+                                        navigate("/course-details", {
                                             state: {
-                                                courseName:
-                                                    "Computer Science"
+                                                courseName: course.courseName
                                             }
-                                        }
-                                    )
-                                }
-                            >
-                                View Course →
-                            </button>
+                                        })
+                                    }
+                                >
+                                    Explore Course <span>→</span>
+                                </button>
 
-                        </div>
-
-
-                        <div className="home-course-card">
-
-                            <div className="home-course-icon">
-                                🤖
                             </div>
-
-                            <h3>
-                                Artificial Intelligence
-                            </h3>
-
-                            <p>
-                                Learn machine learning, NLP,
-                                deep learning and computer vision.
-                            </p>
-
-                            <button
-                                onClick={() =>
-                                    navigate(
-                                        "/course-details",
-                                        {
-                                            state: {
-                                                courseName:
-                                                    "Artificial Intelligence"
-                                            }
-                                        }
-                                    )
-                                }
-                            >
-                                View Course →
-                            </button>
-
-                        </div>
-
-
-                        <div className="home-course-card">
-
-                            <div className="home-course-icon">
-                                🌐
-                            </div>
-
-                            <h3>
-                                Web Development
-                            </h3>
-
-                            <p>
-                                Learn HTML, CSS, JavaScript,
-                                responsive design and React.
-                            </p>
-
-                            <button
-                                onClick={() =>
-                                    navigate(
-                                        "/course-details",
-                                        {
-                                            state: {
-                                                courseName:
-                                                    "Web Development"
-                                            }
-                                        }
-                                    )
-                                }
-                            >
-                                View Course →
-                            </button>
-
-                        </div>
+                        ))}
 
                     </div>
-
                 </section>
 
-            </div>
+            </main>
 
             <Footer />
         </>

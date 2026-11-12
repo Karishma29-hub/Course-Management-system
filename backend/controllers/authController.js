@@ -1,3 +1,4 @@
+
 const authService = require("../services/authService");
 const jwt = require("jsonwebtoken");
 
@@ -9,6 +10,7 @@ async function register(req, res, next) {
             message: "Student registered successfully",
             user
         });
+
     } catch (error) {
         next(error);
     }
@@ -22,6 +24,7 @@ async function registerAdmin(req, res, next) {
             message: "Admin registered successfully",
             user
         });
+
     } catch (error) {
         next(error);
     }
@@ -33,13 +36,16 @@ async function login(req, res, next) {
 
         const token = jwt.sign(
             {
-                sub: user.id,
-                id: user.id,
+                sub: String(user.id),
+                id: String(user.id),
                 email: user.email,
                 role: user.role
             },
             process.env.JWT_SECRET,
-            { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
+            {
+                expiresIn: process.env.JWT_EXPIRES_IN || "1d",
+                algorithm: "HS256"
+            }
         );
 
         return res.status(200).json({
@@ -47,6 +53,7 @@ async function login(req, res, next) {
             token,
             user
         });
+
     } catch (error) {
         next(error);
     }
